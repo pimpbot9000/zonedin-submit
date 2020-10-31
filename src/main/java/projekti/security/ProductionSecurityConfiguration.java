@@ -27,9 +27,7 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
         http.csrf().disable();
         http.headers().frameOptions().sameOrigin();
 
-        http.authorizeRequests()
-                .antMatchers("/dev", "/dev/**").permitAll()
-                .antMatchers("/h2-console", "/h2-console/**").permitAll()
+        http.authorizeRequests()                
                 .antMatchers("/static", "/static/**").permitAll()
                 .antMatchers("/signin", "/signin/**").permitAll()
                 .antMatchers("/login", "/login/**").permitAll()
