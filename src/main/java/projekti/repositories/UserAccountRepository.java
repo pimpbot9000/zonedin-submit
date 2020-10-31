@@ -6,7 +6,6 @@
 package projekti.repositories;
 
 import java.util.List;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,8 +16,7 @@ import projekti.models.UserAccount;
  * @author tvali
  */
 public interface UserAccountRepository extends JpaRepository<UserAccount, Long> {
-
-    //@EntityGraph(attributePaths = {"profileImage"})
+    
     UserAccount findByUsername(String username);
     
     UserAccount findByIdString(String idString);
@@ -42,9 +40,3 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, Long> 
     
     
 }
-
-/*
-SELECT * FROM USER_ACCOUNT WHERE firstname LIKE '%?1%'
-UNION
-SELECT * FROM USER_ACCOUNT WHERE lastname LIKE '%?2%'
- */

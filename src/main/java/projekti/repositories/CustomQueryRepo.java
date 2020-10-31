@@ -8,9 +8,7 @@ package projekti.repositories;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Component;
 import projekti.models.IMyQuery;
-import projekti.models.ProfileImage;
 import projekti.models.UserAccount;
 
 /**
@@ -26,18 +24,3 @@ public interface CustomQueryRepo extends JpaRepository <UserAccount, Long>{
     List<IMyQuery> getWithFriends(Long id);   
      
 }
-
-/* SELECT INVITEE.ID, INVITEE.FIRSTNAME, INVITEE.PROFILE_IMAGE_ID FROM USER_ACCOUNT as U
-    JOIN USER_ACCOUNT_SENT_INVITES as I
-    ON 
-    U.ID = I.USER_ACCOUNT_ID
-    JOIN USER_ACCOUNT as INVITEE
-    ON I.SENT_INVITES_ID = INVITEE.ID
-    WHERE U.ID = 33
-
-    */
-
-/*@Query(
-  value = "SELECT * FROM Users u WHERE u.status = ?1", 
-  nativeQuery = true)
-User findUserByStatusNative(Integer status);*/
