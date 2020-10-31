@@ -32,7 +32,7 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
                 .antMatchers("/static", "/static/**").permitAll()
                 .antMatchers("/signin", "/signin/**").permitAll()
                 .antMatchers("/login", "/login/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/feed").permitAll()  
+                .antMatchers(HttpMethod.GET, "/feed/").permitAll()  
                 .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
                 .and()
