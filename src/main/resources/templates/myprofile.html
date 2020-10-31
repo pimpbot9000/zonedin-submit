@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/general.html :: head">
+        <title>Title</title>
+    </head>
+    <body>
+        <nav th:replace="fragments/general.html :: navbar"></nav>
+
+        <div class="container">
+
+
+            <h2><span th:text="${userAccount.firstname}">Firstname</span> <span th:text="${userAccount.lastname}">Firstname</span></h2>
+            
+            <p>
+                <img th:if="${userAccount.profileImage}" th:src="@{/profileimages/{username}(username=${userAccount.username})}" class="img-thumbnail" style="max-height: 300px;"/>                
+            </p>
+
+            <h4>Set profile image</h4>
+
+            <form method="POST" th:action="@{/profileimages}" enctype="multipart/form-data">
+                <input type="file" class="btn btn-light" name="file" id="file"/>
+                <input type="submit" class="btn btn-light" value="Add!"/>
+            </form>
+            
+            <h4>Bio</h4>
+            <p th:text="${userAccount.bio}">bio</p>
+            <p>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Edit bio
+                </button>
+            </p>
+
+            <div class="collapse" id="collapseExample">
+                <form method="POST" th:action="@{/myprofile/bio}">
+                    <div class="form-group">
+                        <input type="textarea" class="form-control" name="bio" th:value="${userAccount.bio}"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-light" value="Update bio"/>
+                    </div>
+                </form>
+            </div>
+
+            
+
+        </div>
+
+
+
+        <th:block th:replace="fragments/general.html :: bootstrapscripts"></th:block>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/general.html :: head">
+        <title>Title</title>
+    </head>
+    <body>
+        <nav th:replace="fragments/general.html :: navbar"></nav>
+
+        <div class="container">
+            <h3>Search Results</h3>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4" th:each="account : ${accounts}">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <p><img class="img-fluid" th:src="@{/profileimages/{username}(username=${account.username})}" alt="card image" style="max-height: 200px;"/></p>                            
+                            <h4 class="card-title"><a th:href="@{/profiles/{idString}(idString=${account.idString})}"> <span th:text="${account.firstname}"></span> <span th:text="${account.lastname}"></span></a></h4>                          
+                        </div>
+                    </div>
+                </div>
+            </div>          
+            
+        </div>
+
+        <th:block th:replace="fragments/general.html :: bootstrapscripts"></th:block>
+    </body>
+</html>

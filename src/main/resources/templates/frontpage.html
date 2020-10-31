@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/general.html :: head">
+        <title>Title</title>
+    </head>
+    <body>
+        <div class="jumbotron text-center" style="margin-bottom:0">
+            <h1>ZonedOut!</h1>
+            <p>Build your Network and Connect with imaginary people!</p> 
+        </div>
+        <nav th:replace="fragments/general.html :: navbar"></nav>
+
+        <div class="container">
+            <div class="alert alert-info" role="alert" th:if="${signin}">
+                Signin successful! Go a head and <a th:href="@{/home}">login</a>!
+            </div>
+            <br/>
+            <h2>Hi there!</h2>
+            <p>Login or signup. Or don't.</p>
+        </div>
+
+        <th:block th:replace="fragments/general.html :: bootstrapscripts"></th:block>
+    </body>
+</html>

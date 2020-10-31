@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="fragments/general.html :: head">
+        <title>Title</title>
+    </head>
+    <body>
+        
+        <nav th:replace="fragments/general.html :: navbar"></nav>
+        <header th:replace="fragments/header :: header">
+            <p>header with links etc</p>
+        </header>
+
+        <h2>ZonedOut</h2> 
+
+        <p>Hello <span th:text="${userAccount.firstname}">Firstname</span></p>
+
+        <th:block th:replace="fragments/general.html :: bootstrapscripts"></th:block>
+    </body>
+</html>

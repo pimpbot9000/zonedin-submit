@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="fragments/general.html :: head">
+        <title>Title</title>
+    </head>
+
+    <body>
+        <nav th:replace="fragments/general.html :: navbar"></nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <h2><span th:text="${userAccount.firstname}">Firstname</span> <span
+                            th:text="${userAccount.lastname}">Firstname</span></h2>
+                    <p th:text="${userAccount.id}"></p>
+                    <p>
+                        <img th:src="@{/profileimages/{username}(username=${userAccount.username})}" class="img-thumbnail"
+                             style="max-height: 300px;" />
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <h2>Bio</h2>
+                    <p th:text="${userAccount.bio}">bio</p>
+                </div>
+            </div>
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="contacts-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Contacts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pendingInvites-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Sent Invites</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pendingApprovals-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Awaiting approval</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="contacts-tab">
+                    <br/>
+                    <div class="row" id="contacts">
+                        <div class="col-xs-12 col-sm-6 col-md-4" th:each="contact : ${userAccount.contacts}"
+                             th:id="${'contact' + contact.id}">
+                            <div class="card">
+                                <div class="card-body text-center">
+
+                                    <p><img class="img-fluid" th:src="@{/profileimages/{username}(username=${contact.username})}"
+                                            alt="card image" style="max-height: 200px;" /></p>
+                                   
+                                    <h4 class="card-title"><a th:href="@{/profiles/{idString}(idString=${contact.idString})}"> <span th:text="${contact.firstname}"></span> <span th:text="${contact.lastname}"></span></a></h4>
+
+                                    <form class="removeContactForm" th:action="@{/contacts/{contactId}(contactId=${contact.id})}">
+                                        <input type="hidden" name="redirect" value="home" />
+                                        <button type="submit" class="btn btn-outline-danger">remove contact</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- hidden contacts pending for approval -->
+                        <div class="col-xs-12 col-sm-6 col-md-4 d-none" th:each="contact : ${userAccount.receivedInvites}"
+                             th:id="${'contact' + contact.id}">
+                            <div class="card">
+                                <div class="card-body text-center">
+
+                                    <p><img class="img-fluid" th:src="@{/profileimages/{username}(username=${contact.username})}"
+                                            alt="card image" style="max-height: 200px;" /></p>
+                                    <h4 class="card-title"><a th:href="@{/profiles/{idString}(idString=${contact.idString})}"> <span th:text="${contact.firstname}"></span> <span th:text="${contact.lastname}"></span></a></h4>
+                                   
+                                    <form class="removeContactForm" th:action="@{/contacts/{contactId}(contactId=${contact.id})}">
+                                        
+                                        <button type="submit" class="btn btn-outline-danger">remove contact</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="pendingInvites-tab">
+                    <br/>
+                    <div class="row" id="pendingInvites">
+                        <div class="col-xs-12 col-sm-6 col-md-4" th:each="contact : ${userAccount.sentInvites}"
+                             th:id="${'pendingInvite' + contact.id}">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class="img-fluid" th:src="@{/profileimages/{username}(username=${contact.username})}"
+                                            alt="card image" style="max-height: 200px;" /></p>
+                                    <h4 class="card-title"><a th:href="@{/profiles/{idString}(idString=${contact.idString})}"> <span th:text="${contact.firstname}"></span> <span th:text="${contact.lastname}"></span></a></h4>
+                                    
+
+                                    <form class="cancelPendingInviteForm"
+                                          th:action="@{/contacts/pendingInvites/{contactId}(contactId=${contact.id})}">
+                                        
+                                        <button type="submit" class="btn btn-outline-danger">cancel invite</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="pendingApprovals-tab">
+                    <br/>
+                    <div class="row" id="pendingApprovals">
+                        <div class="col-xs-12 col-sm-6 col-md-4" th:each="contact : ${userAccount.receivedInvites}"
+                             th:id="${'pendingApproval' + contact.id}">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class="img-fluid" th:src="@{/profileimages/{username}(username=${contact.username})}"
+                                            alt="card image" style="max-height: 200px;" /></p>
+                                    <h4 class="card-title"><a th:href="@{/profiles/{idString}(idString=${contact.idString})}"> <span th:text="${contact.firstname}"></span> <span th:text="${contact.lastname}"></span></a></h4>
+                                    
+
+                                    <form class="acceptPendingApprovalForm"
+                                          th:action="@{/contacts/pendingApprovals/{contactId}(contactId=${contact.id})}">
+                                        
+                                        <button type="submit" class="btn btn-primary">accept invite</button>
+                                    </form>
+                                    <br/>
+                                    <form class="dismissPendingApprovalForm"
+                                          th:action="@{/contacts/pendingApprovals/{contactId}(contactId=${contact.id})}">
+                                        
+                                        <button type="submit" class="btn btn-outline-danger">reject invite</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <th:block th:replace="fragments/general.html :: bootstrapscripts"></th:block>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <script src="/static/js/home.js"></script>
+
+    </body>
+
+</html>

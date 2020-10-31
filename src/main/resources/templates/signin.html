@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/general.html :: head">
+        <title>Title</title>
+    </head>
+    <body>
+        <nav th:replace="fragments/general.html :: navbar"></nav>
+
+        <div class="container">
+
+
+            <h2>Sign in!</h2>
+            
+            <div class="alert alert-danger" role="alert" th:if="${userExists}">
+                Username already in use.
+            </div>
+            <br th:if="${userExists}"/>            
+            <div class="alert alert-danger" role="alert" th:if="${idStringExists}">
+                Id String already in use.
+            </div>
+
+
+            <form method="POST" th:action="@{/signin}" th:object="${userAccount}">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username"  placeholder="Username" th:value="${username}" th:field="*{username}" th:classappend="${#fields.hasErrors('username') ? 'is-invalid' : ''}"/>
+                        <div class="invalid-feedback">
+                            <span th:errors="*{username}"></span>
+                        </div> 
+                </div>
+                <div class="form-group">
+
+                    <label for="firstname">Firstname</label>
+                    <input type="text" class="form-control" id="firstname" placeholder="firstname" th:field="*{firstname}" th:classappend="${#fields.hasErrors('firstname') ? 'is-invalid' : ''}"/>                        
+                        <div class="invalid-feedback">
+                            <span th:errors="*{firstname}"></span>
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname">Lastname</label>
+                    <input type="text" class="form-control" id="lastname" placeholder="lastname" th:field="*{lastname}" th:classappend="${#fields.hasErrors('lastname') ? 'is-invalid' : ''}"/> 
+                        <div class="invalid-feedback">
+                            <span th:errors="*{lastname}"></span>
+                        </div>  
+                </div>
+
+                <div class="form-group">
+                    <label for="idString">String id</label>
+                    <input type="text" class="form-control" id="idString" placeholder="e.g. hotStuff99" th:field="*{idString}" th:classappend="${#fields.hasErrors('idString') ? 'is-invalid' : ''}"/>
+                        <small id="idStringHelp" class="form-text text-muted">Unique string for profile identifier</small>
+                        <div class="invalid-feedback">
+                            <span th:errors="*{idString}"></span>
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword1">Password</label>
+                    <input type="password" class="form-control" id="inputPassword1" placeholder="Password" th:field="*{password}" th:classappend="${(passwordTooShort != null OR passwordMismatch != null OR #fields.hasErrors('password') ) ? 'is-invalid' : ''}"/>
+                    <div class="invalid-feedback">
+                            <span th:if="${passwordMismatch}">Passwords did no match</span><br th:if="${passwordMismatch}"/>
+                            <span th:if="${passwordTooShort}">Password too short. Must be at least 5 characters</span><br th:if="${passwordTooShort}"/>
+                            <span th:if="${ #fields.hasErrors('password') == true}" th:errors="*{idString}"></span>                            
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword2">Repeat Password</label>
+                    <input type="password" name="password2" class="form-control" id="inputPassword1" placeholder="Password again"/>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Sign in!</button>
+            </form>
+
+        </div>
+
+        <th:block th:replace="fragments/general.html :: bootstrapscripts"></th:block>
+    </body>
+</html>
