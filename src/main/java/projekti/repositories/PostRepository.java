@@ -5,10 +5,14 @@
  */
 package projekti.repositories;
 
+import java.util.Collection;
 import java.util.List;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import projekti.models.Post;
+import projekti.models.UserAccount;
+import org.springframework.data.domain.Pageable;
 
 /**
  *
@@ -17,6 +21,9 @@ import projekti.models.Post;
 public interface PostRepository extends JpaRepository <Post, Long>{
     @EntityGraph(attributePaths = {"author", "replies"})
     List<Post> findAll();
+    
+    @EntityGraph(attributePaths = {"author", "replies"})
+    Page<Post> findByAuthorIn(Collection<UserAccount> myContactsAndMe, Pageable pageable);
 }
 
 

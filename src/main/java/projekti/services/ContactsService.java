@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projekti.services;
 
 import java.util.List;
@@ -16,11 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import projekti.models.UserAccount;
 import projekti.repositories.UserAccountRepository;
 
-/**
- * Class violates DRY principle, but..
- *
- * @author tvali
- */
 @Service
 public class ContactsService {
 

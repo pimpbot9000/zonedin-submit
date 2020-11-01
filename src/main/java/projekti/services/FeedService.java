@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projekti.services;
 
 import java.time.LocalDateTime;
@@ -22,10 +17,6 @@ import projekti.models.UserAccount;
 import projekti.repositories.PostRepository;
 import projekti.repositories.ReplyRepository;
 
-/**
- *
- * @author tvali
- */
 
 @Service
 public class FeedService {
@@ -40,9 +31,12 @@ public class FeedService {
         return postRepository.findAll();
     }
     
-    public Page<Post> getLatestPosts(int pageSize){
+    public Page<Post> getLatestPosts(int pageSize, UserAccount account){
         Pageable pageable = PageRequest.of(0, pageSize, Sort.by("dateTime").descending());
-        return postRepository.findAll(pageable);        
+        //return postRepository.findAll(pageable);
+        List<UserAccount> contacts = account.getContacts();
+        contacts.add(account);
+        return postRepository.findByAuthorIn(contacts, pageable);
     }
     
     public void addPost(UserAccount account, String content){        

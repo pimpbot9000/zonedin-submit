@@ -37,7 +37,7 @@ public class FeedController {
 
         UserAccount account = userAccountService.getUserAccount(auth.getName());
         
-        Page<Post> posts = feedService.getLatestPosts(25);
+        Page<Post> posts = feedService.getLatestPosts(25, account);
         
         model.addAttribute("posts", posts);
         model.addAttribute("userAccount", account);

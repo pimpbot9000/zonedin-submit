@@ -23,8 +23,7 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // mahdollistetaan h2-konsolin käyttö
-        System.out.println("Enable production security configuration");
+        
         http.csrf().disable();
         http.headers().frameOptions().sameOrigin();
 
