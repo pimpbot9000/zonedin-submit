@@ -33,7 +33,7 @@ public class ProfileImage extends AbstractPersistable<Long>{
     
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Type(type = "org.hibernate.type.BinaryType") // this should be enabled only for heroku postGres
+    //@Type(type = "org.hibernate.type.BinaryType") // this should be enabled only for heroku postGres
     private byte[] content;
     
     @OneToOne(mappedBy = "profileImage")
