@@ -9,7 +9,7 @@ Since I was kinda running out of time I did not implement the following features
 - The "feed" aka the "message board" only shows the latest 20 messages, there's no way to see older messages.
 
 There is some basic jquery/axios-magic to make the users home-view dynamic and there's some sort of RESTfull-ish backend stuff there to support it, but as I said
-most of it is static stuff.
+most of the app is static stuff, based on template rendering.
 
 ### Deployment
 
@@ -17,7 +17,9 @@ The project is hosted in Heroku, one can find it [here](https://dreadful-skull-0
 
 ### Usage
 
-In the Heroku deployment there are three different test-users, with usernames: ```user1```, ```user2``` and ```user3```. The password for each user is ```12345```.
+In the Heroku deployment there are three different test-users, with usernames: ```user1```, ```user2``` and ```user3```. The password for each previously mentioned user is ```12345```.
+
+When running the app locally use the ```dev``` profile.
 
 ### Disclaimer
 
