@@ -17,7 +17,7 @@ The project is hosted in Heroku, one can find it [here](https://dreadful-skull-0
 
 ### Usage
 
-In the Heroku deployment there are three different test-users, with usernames: user1, user2, user3. The password for each user is "12345".
+In the Heroku deployment there are three different test-users, with usernames: ```user1```, ```user2``` and ```user3```. The password for each user is ```12345```.
 
 ### Disclaimer
 
