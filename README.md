@@ -9,7 +9,7 @@ Since I was kinda running out of time I did not implement the following features
 - The "feed" aka the "message board" only shows the latest 20 messages, there's no way to see older messages.
 
 There is some basic jquery/axios-magic to make the users home-view dynamic and there's some sort of RESTfull-ish backend stuff there to support it, but as I said
-most of the app is static stuff, based on template rendering.
+most of the app is static stuff, based on simple template rendering and post-redirect-get -pattern.
 
 ### Deployment
 
