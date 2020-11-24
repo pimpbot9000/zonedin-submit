@@ -37,8 +37,9 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
                 .loginPage("/login")
                 .permitAll() 
                 .failureUrl("/login?error=true")               
-                .and()
-                .logout().logoutUrl("/logout")
+                .and()              
+                
+                .logout().permitAll().logoutUrl("/logout")
                 .permitAll().logoutSuccessUrl("/");
 
     }
