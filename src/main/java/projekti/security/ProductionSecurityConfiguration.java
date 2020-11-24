@@ -33,12 +33,12 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
                 .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
+                .formLogin().permitAll()
                 .loginPage("/login")
                 .permitAll() 
                 .failureUrl("/login?error=true")               
                 .and()
-                .logout().logoutSuccessUrl("/");
+                .logout().permitAll().logoutSuccessUrl("/");
 
     }
 
