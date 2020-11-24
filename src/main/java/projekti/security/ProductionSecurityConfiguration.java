@@ -22,11 +22,10 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
     private CustomUserDetailsService userDetailsService;
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {        
         
-        http.csrf().disable();
-        http.headers().frameOptions().sameOrigin();
 
+        http.csrf().ignoringAntMatchers("/login", "/login/**");
         http.authorizeRequests()                
                 .antMatchers("/static", "/static/**").permitAll()
                 .antMatchers("/signin", "/signin/**").permitAll()
