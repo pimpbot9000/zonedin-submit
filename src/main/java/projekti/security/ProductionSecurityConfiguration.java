@@ -25,7 +25,7 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
     protected void configure(HttpSecurity http) throws Exception {        
         
 
-        http.csrf().ignoringAntMatchers("/login", "/login/**");
+        http.csrf().ignoringAntMatchers("/login", "/login/**", "/logout");
         http.authorizeRequests()                
                 .antMatchers("/static", "/static/**").permitAll()
                 .antMatchers("/signin", "/signin/**").permitAll()
