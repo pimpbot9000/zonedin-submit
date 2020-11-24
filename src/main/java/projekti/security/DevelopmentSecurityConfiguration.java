@@ -23,9 +23,9 @@ public class DevelopmentSecurityConfiguration extends WebSecurityConfigurerAdapt
     protected void configure(HttpSecurity http) throws Exception {
         // mahdollistetaan h2-konsolin käyttö
         System.out.println("Enable development security configuration");
-        http.csrf().disable();
-        http.headers().frameOptions().sameOrigin();
-
+        
+        //http.headers().frameOptions().sameOrigin();
+        http.csrf().ignoringAntMatchers("/login", "/login/**");
         http.authorizeRequests()
                 .antMatchers("/dev", "/dev/**").permitAll()
                 .antMatchers("/h2-console", "/h2-console/**").permitAll()
@@ -38,11 +38,10 @@ public class DevelopmentSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .formLogin()
                 .loginPage("/login")
                 .permitAll() 
-                .failureUrl("/login?error=true")
-               
+                .failureUrl("/login?error=true")               
                 .and()
                 .logout();              
-
+        
         
     }
 
